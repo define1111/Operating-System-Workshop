@@ -28,7 +28,7 @@ void loop()
 
     for(;;)
     {
-        printf(">>> ");
+        fputs(">>> ", stdout);
         scanf_return = scanf("%d", &num);
         
         switch (scanf_return)    

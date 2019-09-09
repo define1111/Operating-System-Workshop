@@ -53,7 +53,7 @@ int main(int argc, char **argv)
     
     if (ball.begin >= ball.end)
     {
-        fprintf(stderr, "begin must be greater then end\n");
+        fprintf(stderr, "end must be greater then begin\n");
         return arg_err;
     }
 
@@ -87,6 +87,10 @@ int main(int argc, char **argv)
         
         kill(child2, SIGCONT);        
         kill(child2, SIGTERM);
+        
+        close(pipefd_ping_pong[0]);
+        close(pipefd_ping_pong[1]);
+
         return success_exit;
     }
     
@@ -118,6 +122,10 @@ int main(int argc, char **argv)
         
         kill(child1, SIGCONT);       
         kill(child1, SIGTERM);
+
+        close(pipefd_ping_pong[0]);
+        close(pipefd_ping_pong[1]);
+
         return success_exit;
     }
 

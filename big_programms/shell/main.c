@@ -1,10 +1,13 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include "h/main.h"
+#include "inc/main.h"
 
-void promt(void);
+static void init(void);
+static void loop(void);
+static void promt(void);
 
-int main(int argc, char **argv)
+int
+main(int argc, char **argv)
 {
     init();
     
@@ -13,23 +16,27 @@ int main(int argc, char **argv)
     goodbye();
 }
 
-void init()
+void
+init()
 {
     
 }
 
-void loop()
+void 
+loop()
 {
     promt();  
     putc('\n', stdout);
 }
 
-void goodbye()
+void 
+goodbye()
 {
    exit(0); 
 }
 
-void promt()
+void 
+promt()
 {
     char *user = getenv("USER");
     char *pwd = getenv("PWD");

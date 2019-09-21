@@ -52,5 +52,5 @@ promt()
 {
     char *user = getenv("USER");
     char *pwd = getenv("PWD");
-    printf(MAGNETA "[toy_shell]" GREEN "%s" WHITE ":" BLUE "%s" WHITE "$ ", user, pwd);
+    printf(YELLOW "[toy_shell]" GREEN "%s" WHITE ":" BLUE "%s" WHITE "$ ", user, pwd);
 }

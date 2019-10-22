@@ -1,10 +1,7 @@
 #include <stdlib.h>
-#include <stdio.h>
 
 #include "inc/main.h"
-#include "inc/read_str.h"
-
-enum { buffer_size = 16 };
+#include "inc/io.h"
 
 static void init(void);
 static void loop(void);
@@ -34,8 +31,9 @@ loop()
     for (;;)
     {
         promt();
-        input_str = read_str(stdin, buffer_size); 
-        puts(input_str);
+        input_str = fd_read_str(0); 
+        put_string(input_str);
+        put_char('\n');
         free(input_str);
         input_str = NULL;
     }
@@ -52,5 +50,10 @@ promt()
 {
     char *user = getenv("USER");
     char *pwd = getenv("PWD");
-    printf(YELLOW "[toy_shell]" GREEN "%s" WHITE ":" BLUE "%s" WHITE "$ ", user, pwd);
+   // printf(YELLOW "[toy_shell]" GREEN "%s" WHITE ":" BLUE "%s" WHITE "$ ", user, pwd);
+    fd_put_string(1, YELLOW "[toy_shell]" GREEN);
+    fd_put_string(1, user);
+    fd_put_string(1, WHITE ":" BLUE);
+    fd_put_string(1, pwd);
+    fd_put_string(1, WHITE "$ ");
 }

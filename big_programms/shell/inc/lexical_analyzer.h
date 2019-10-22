@@ -8,6 +8,7 @@ enum lex
     lex_less, /* < */ lex_more, /* > */, lex_mooore, /* >> */, lex_vertical_line, /* | */
     lex_slash, /* / */ lex_sharp, /* # */ lex_ampersand, /* & */ lex_semicolon, /* ; */
     lex_env, /* ${VAR} */
+    lex_regex /* ?* */
 };
 
 typedef enum lex lex_t;
@@ -22,7 +23,12 @@ typedef struct token token_t;
 
 enum state_lex
 {
-    
-}
+    none = 0,
+    loop, word, 
+    in_single_quotes, in_double_quotes,
+    special_symbol
+};
+
+typedef enum state_lex state_lex_t;
 
 #endif

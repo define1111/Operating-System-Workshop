@@ -1,25 +1,20 @@
-# Salnikov_Prac_2018
+# Operating-System-Workshop
 
-## Task 0. "Printout of bits"
-Print an integer bitwise using a bit shift.
+Теперь по-русски, потому что мне надоело писать по-английски, к тому же микрычам так будет проще. Здесь представлены разные практические и зачетные задачи от Сальникова А. Н. по дисциплине "Операционные системы" за прошлые годы. Порядок задач не имеет значения, тут все вперемешку. На лекциях я его не слушал, так что не знаю какой проходится теоретический курс, но по факту практические задачи представляют собой просто упражнение на умение работать с API Linux на языке Си. Сразу предупреждаю, что я выбрал стандарт C89, потому что я фарисей. Если есть где-то в решениях ошибка, пожалуйста, напишите мне куда-нибудь.
 
-## Task 1. "Print lines in reverse"
-An unknown number of lines are entered at the entrance to the program. You need to display them in the reverse order. Use dynamic memory.
+## Практические задачи
 
-## Task 2. "Diagonal in the matrix"
-The program considers the sum of the diagonal elements of the matrix in the file. In addition, you need to write a program that will enter a matrix into this file. You also need to write a Makefile in order to speed up the process of compiling and linking this all. (Read about make and makefile.)
+### Задача 0. "Распечатка битов".
+Распечатать побитово число типа int, используя битовый сдиг.
 
-## Task 3. "Ring list"
-An array of strings is fed into the program. It is necessary to create an element of a ring list for each line, then find the smallest lexicographic element and display a list starting with this element.
+### Задача 1. "Распачатка строк в обратном порядке"
+На вход программе подаются строки. Программа должна их распечатать в обратном порядке. Нужно использовать динамическую память.
 
-## Task 4. "Printout of the pids hierarchy of three sons"
-There is a father process, he creates three sons, channel (s) between them. Each of the processes prints to stdout
-Father: <pid father / son1 / son2 / son3>
-Son1: <pid father / son1 / son2 / son3>
-Son2: <pid father / son1 / son2 / son3>
-Son3: <pid father / son1 / son2 / son3>
-The repository presents implementations for one, two, and three descendants.
+### Задача 2. "Диагональ матрицы"
+Написать две программы. Одна пишет матрицу в файл, другая считывает из файла матрицу и считает сумму элементов на диагонали. Также нужно использовать Makefile для ускорения процесса компиляции и линковки всего этого.
 
-## Task 5. "Ping-Pong of three sons"
-The sons of the processes are thrown by the signal, the so-called ball, and type "I'm son1 / son2 / son3: the value of the ball", where the value of the ball with each "hit" increases by 1.
+### Задача 3. "Кольцо"
+На вход программе подаются строки. Нужно создать закольцованный список, хранящий эти строки, затем найти наименьшую в лексикографическом смысле строку и напечатать список, начиная с элемента, содержащего эту строку.
 
+## Зачетные задачи
+Пока пусто.

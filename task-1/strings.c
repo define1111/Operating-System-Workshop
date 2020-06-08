@@ -1,52 +1,40 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-enum { buffer_step = 16 };
-
-char *read_str(FILE *f, size_t buffer_step)
+char *
+read_str()
 {
-    __int32_t ch = 0;
+    int ch = 0;
     char *str = NULL;
     size_t i = 0;
 
-    str = (char*) malloc(buffer_step * sizeof(char));
-    if (str == NULL) return NULL;
-    
-    for(;;i++)
+    while (1)
     {
-        ch = fgetc(f);
-        
-        if (ch == '\n' || ch == EOF)
+        str = (char*) realloc(str, ++i * sizeof(char));
+        if (str == NULL)
         {
-            if (i % buffer_step == 0)
-            {
-                str = (char*) realloc(str, (i + 1) * sizeof(char));
-                if (str == NULL) return NULL;
-            }
-
-            str[i] = '\0';
-            return str;
+            perror("realloc");
+            exit(1);
         }
 
-        if (i % buffer_step == 0)
+        ch = getchar();
+
+        if (ch == EOF || ch == '\n')
         {
-            str = (char*) realloc(str, (i + buffer_step) * sizeof(char));
-            if (str == NULL) return NULL;
+            str[i - 1] = '\0';
+            break;
         }
-        
-        str[i] = (char) ch;
+
+        str[i - 1] = (char) ch;
     }
+
+    return str;
 }
 
-int main()
+int 
+main()
 {
-    char *str = read_str(stdin, buffer_step);
-
-    if (str == NULL)
-    {
-        perror("alloc");
-        return 1;
-    }   
+    char *str = read_str();
 
     if (!*str)
     {

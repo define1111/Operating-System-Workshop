@@ -14,7 +14,7 @@ int check_bit(int32_t value, size_t position)
 
 void println_bits(int32_t value)
 {
-    size_t i = byte_size * sizeof(int32_t) - 1;
+    size_t i = byte_size * sizeof(int32_t);
 
     while (i --> 0)
     {

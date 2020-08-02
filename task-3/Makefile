@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -g -Wall -std=c99 -pedantic
+CFLAGS = -g -Wall -Wextra -Werror -std=c11 -pedantic
 
 lex_min: main.o ring.o
 	$(CC) $(CFLAGS) $^ -o $@

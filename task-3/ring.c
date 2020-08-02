@@ -3,7 +3,8 @@
 #include <string.h>
 #include "ring.h"
 
-ring_t *init(char *str)
+ring_t 
+*init(char *str)
 {
     ring_t *root = (ring_t*) malloc(sizeof(ring_t));
     if (root == NULL) return NULL;
@@ -14,7 +15,8 @@ ring_t *init(char *str)
     return root;
 }
 
-ring_t *add_item(ring_t *item, char *str)
+ring_t 
+*add_item(ring_t *item, char *str)
 {
     ring_t *temp, *next;
 
@@ -29,7 +31,8 @@ ring_t *add_item(ring_t *item, char *str)
     return temp;    
 }
 
-void free_ring(ring_t *item)
+void 
+free_ring(ring_t *item)
 {
     if (item)
     {
@@ -39,7 +42,8 @@ void free_ring(ring_t *item)
     }
 }
 
-static ring_t *prev(ring_t *item)
+static ring_t *
+prev(ring_t *item)
 {
     ring_t *i;
 
@@ -49,12 +53,14 @@ static ring_t *prev(ring_t *item)
     return i;
 }
 
-void cut_ring(ring_t *root)
+void 
+cut_ring(ring_t *root)
 {
     prev(root)->next = NULL;
 }
 
-void fprint_ring(FILE *f, ring_t *root)
+void 
+fprint_ring(FILE *f, ring_t *root)
 {
     ring_t *next = root;
 
@@ -65,7 +71,8 @@ void fprint_ring(FILE *f, ring_t *root)
     } while (next != root);
 }
 
-ring_t *find_lex_min(ring_t *root)
+ring_t *
+find_lex_min(ring_t *root)
 {
     ring_t *min = root, *next = root;
     

@@ -4,54 +4,39 @@
 
 enum { buffer_step = 16 };
 enum { success_exit = 0, alloc_err };
-
-char *read_str(FILE *f, size_t buffer_step)
+  
+char *
+read_str()
 {
-    __int32_t ch = 0;
+    int ch = 0;
     char *str = NULL;
     size_t i = 0;
 
-    str = (char*) malloc(buffer_step * sizeof(char));
-    if (str == NULL) return NULL;
-    
-    for(;;i++)
+    while(1)
     {
-        ch = fgetc(f);
+        str = (char*) realloc(str, ++i * sizeof(char));
+        if (str == NULL)
+        {
+            perror("realloc");
+            exit(alloc_err);
+        }
+
+        ch = getchar();
         
         if (ch == '\n' || ch == EOF)
         {
-            if (i % buffer_step == 0)
-            {
-                str = (char*) realloc(str, (i + 1) * sizeof(char));
-                if (str == NULL) return NULL;
-            }
-
-            str[i] = '\0';
-            return str;
-        }
-
-        if (i % buffer_step == 0)
-        {
-             str = (char*) realloc(str, (i + buffer_step) * sizeof(char));
-             if (str == NULL) return NULL;
+            str[i - 1] = '\0';
+            break;
         }
         
-        str[i] = (char) ch;
+        str[i - 1] = (char) ch;
      }
+
+     return str;
 }
 
-char *check_read_str(FILE *f, size_t buffer_step)
-{
-    char *str = read_str(f, buffer_step);
-    if (str == NULL)
-    {
-        perror("alloc");
-        exit(alloc_err);
-    }
-    return str;
-}
-
-ring_t *check_init(char *str)
+ring_t *
+check_init(char *str)
 {
     ring_t *root = init(str);
     if (root == NULL)
@@ -62,7 +47,8 @@ ring_t *check_init(char *str)
     return root;
 }
 
-ring_t *check_add_item(ring_t *item, char *str)
+ring_t *
+check_add_item(ring_t *item, char *str)
 {
     ring_t *temp = add_item(item, str);
     if (temp == NULL)
@@ -73,26 +59,28 @@ ring_t *check_add_item(ring_t *item, char *str)
     return temp;
 }
 
-ring_t *make_ring()
+ring_t *
+make_ring()
 {
-    char  *str = check_read_str(stdin, buffer_step);
+    char *str = read_str();
     ring_t *root = check_init(str);   
     ring_t *next = root;    
 
-    while (*(str = check_read_str(stdin, buffer_step)))
+    while (*(str = read_str()))
         next = check_add_item(next, str);
 
     free(str);    
     return root;    
 }
 
-int main()
+int 
+main()
 {
     ring_t *root = make_ring();
    
     root = find_lex_min(root);
 
-    putc('\n', stdout); 
+    putc('\n', stdout);
     fprint_ring(stdout, root);
 
     FREE_RING(root);

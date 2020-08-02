@@ -2,17 +2,17 @@
 #include <stdlib.h>
 #include <stddef.h>
 
-typedef __int32_t int32_t;
-
 enum { byte_size = 8 };
 const int32_t one_32bit = 1;
 
-int check_bit(int32_t value, size_t position)
+int 
+check_bit(int32_t value, size_t position)
 {
     return !!(value & (one_32bit << position));
 }
 
-void println_bits(int32_t value)
+void 
+println_bits(int32_t value)
 {
     size_t i = byte_size * sizeof(int32_t);
 
@@ -24,7 +24,8 @@ void println_bits(int32_t value)
     putc('\n', stdout);
 }
 
-void loop()
+void 
+loop()
 {
     int32_t num = 0;
     int32_t scanf_return = 0;
@@ -48,7 +49,8 @@ void loop()
     }
 }
 
-int main()
+int 
+main()
 {
     loop();
 

@@ -1,5 +1,7 @@
 CC = gcc
-CFLAGS = -g -Wall -std=c99 -pedantic
+CFLAGS = -g -Wall -Wextra -Werror -std=c11 -pedantic
+
+all: write_matrix read_matrix
 
 write_matrix: write_matrix.o
 	$(CC) $(CFLAGS) $< -o $@
@@ -14,4 +16,4 @@ read_matrix.o: read_matrix.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -rf *.o
+	rm -rf *.o *_matrix

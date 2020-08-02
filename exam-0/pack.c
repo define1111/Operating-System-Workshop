@@ -19,21 +19,12 @@ typedef union
 uint32_t pack(signed short x, signed short y, signed short z);
 void unpack(uint32_t packed_val, signed short *x, signed short *y, signed short *z);
 
+void test();
+
 int
 main()
 {
-    uint32_t packed_val;
-    signed short x, y, z;
-
-    x = 234;
-    y = -25; 
-    z = -24;
-
-    packed_val = pack(x, y, z);
-
-    unpack(packed_val, &x, &y, &z); 
-
-    printf("%hd %hd %hd\n", x, y, z);
+    test();
 
     return 0;
 }
@@ -41,7 +32,6 @@ main()
 uint32_t
 pack(signed short x, signed short y, signed short z)
 {
-//  uint32_t packed_val = 0;
     bit_ir_t bit_ir;
     bit_ir.int_r = (uint32_t) 0;
 
@@ -72,3 +62,21 @@ unpack(uint32_t packed_val, signed short *x, signed short *y, signed short *z)
     if (bit_ir.sign_z) *z |= 0xFE00; 
 }
 
+void
+test()
+{
+    uint32_t packed_val;
+    signed short x, y, z;
+    signed short unpacked_x, unpacked_y, unpacked_z;
+
+    for (x = -512; x <= 511; ++x)
+        for (y = -512; y <= 511; ++y)
+            for (z = -512; z <= 511; ++z)
+            {
+               packed_val = pack(x, y, z);
+               unpack(packed_val, &unpacked_x, &unpacked_y, &unpacked_z);
+               if (x != unpacked_x || y != unpacked_y || z != unpacked_z)
+                   printf("Test failed\n");
+            }
+
+}
